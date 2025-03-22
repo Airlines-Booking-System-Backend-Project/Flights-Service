@@ -8,6 +8,7 @@ datasource db {
 }
 
 model Airplane {
-  modelNumber String @id
-  capacity    Int @default(10)
+  modelNumber Int    @id @default(autoincrement())
+  modelName   String
+  capacity    Int    @default(0)
 }

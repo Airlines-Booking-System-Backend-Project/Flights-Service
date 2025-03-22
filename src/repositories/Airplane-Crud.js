@@ -6,57 +6,42 @@ class AirplaneService {
     }
 
     async create(data) {
-        try {
-            const airplane = await this.prisma.airplane.create({
-                data: data
-            })
-            return airplane
-        } catch (error) {
-            throw new Error(error);
-        }
+        const airplane = await this.prisma.airplane.create({
+            data: data
+        })
+        return airplane
     }
 
     async get(modelNumber) {
-        try {
-            const airplane = await this.prisma.airplane.findUnique({
-                where: { modelNumber },
-            })
-            return airplane
-        } catch (error) {
-            throw new Error(error)
-        }
+        const airplane = await this.prisma.airplane.findFirst({
+            where: { modelNumber},
+        })
+        return airplane
     }
 
     async update(modelNumber, data) {
-        try {
-            const updatedAirplane = await this.prisma.airplane.update({
-                where: { modelNumber },
-                data: data,
-            })
-            return updatedAirplane
-        } catch (error) {
-            throw new Error(error)
-        }
+        const updateAirplane = await this.prisma.airplane.update({
+            where: { modelNumber },
+            data: data,
+        })
+        return updateAirplane
     }
 
     async delete(modelNumber) {
-        try {
-            const deletedAirplane = await this.prisma.airplane.delete({
-                where: { modelNumber },
-            })
-            return deletedAirplane
-        } catch (error) {
-            throw new Error(error)
-        }
+        const deletedAirplane = await this.prisma.airplane.deleteMany({
+            where: { modelNumber },
+        })
+        return deletedAirplane
     }
 
     async getAllAirplanes() {
-        try {
-            const airplanes = await this.prisma.airplane.findMany()
-            return airplanes
-        } catch (error) {
-            throw new Error(error)
-        }
+        const airplanes = await this.prisma.airplane.findMany()
+        return airplanes
+    }
+
+    async deleteAllAirplanes() {
+        const airplanes = await this.prisma.airplane.deleteMany();
+        return airplanes
     }
 }
 

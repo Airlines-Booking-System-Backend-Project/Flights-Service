@@ -1,4 +1,4 @@
-function ErrorResponse(message, explanation){
+function ErrorResponse(message, explanation) {
     return {
         success: false,
         message: message || "Error occured",

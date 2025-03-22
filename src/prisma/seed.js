@@ -5,19 +5,19 @@ const client = new PrismaClient()
 client.airplane.createMany({
     data: [
         {
-          modelNumber: "A123",
+          modelName: "A123",
           capacity: 150
         },
         {
-          modelNumber: "B456",
+          modelName: "B456",
           capacity: 200
         },
         {
-          modelNumber: "C789",
+          modelName: "C789",
           capacity: 180
         },
         {
-          modelNumber: "D101",
+          modelName: "D101",
           capacity: 120
         }
       ]
