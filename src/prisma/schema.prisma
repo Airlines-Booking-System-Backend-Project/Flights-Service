@@ -12,3 +12,10 @@ model Airplane {
   modelName   String
   capacity    Int    @default(0)
 }
+
+model City {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  state   String
+  country String
+}
