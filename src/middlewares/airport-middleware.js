@@ -1,9 +1,9 @@
 const validateInput = require('./input-middleware')
 
 const constraints = [
+    { params: 'code', dataType: 'string' },
     { params: 'name', dataType: 'string' },
-    { params: 'state', dataType: 'string' },
-    { params: 'country', dataType: 'string' },
+    { params: 'cityId', dataType: 'number' }
 ]
 
 

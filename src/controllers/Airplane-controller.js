@@ -10,7 +10,6 @@ const createAirplane = async (req, res) => {
         const response = await Airplane_Service.createAirplane({ modelName, capacity })
         return res.status(StatusCodes.CREATED).json(SuccessResponse("Successfilly created an Airplane", response))
     } catch (error) {
-        console.log(error.message)
         if(isPrismaError(error)){
             let err = new prismaError(error)
             return res.status(err.statusCode).json(ErrorResponse(err.message,err))

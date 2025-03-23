@@ -8,14 +8,44 @@ datasource db {
 }
 
 model Airplane {
-  modelNumber Int    @id @default(autoincrement())
+  modelNumber Int      @id @default(autoincrement())
   modelName   String
-  capacity    Int    @default(0)
+  capacity    Int      @default(0)
+  Flight      Flight[]
 }
 
 model City {
-  id      Int    @id @default(autoincrement())
-  name    String @unique
+  id      Int       @id @default(autoincrement())
+  name    String
   state   String
   country String
+  airport Airport[]
+
+  @@unique([name, state, country])
+}
+
+model Airport {
+  id               Int      @id @default(autoincrement())
+  code             String   @unique
+  name             String   @unique
+  address          String?
+  cityId           Int
+  city             City     @relation(fields: [cityId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  departureFlights Flight[] @relation("DepartureAirport")
+  arrivalFlights   Flight[] @relation("ArrivalAirport")
+}
+
+model Flight {
+  id                   Int      @id @default(autoincrement())
+  flightNumber         String   @unique
+  departureAirportCode String
+  arrivalAirportCode   String
+  departureTime        DateTime
+  boardingGate         String
+  totalSeats           Int
+  price                Int
+  airplane             Airplane @relation(fields: [airplaneModelNumber], references: [modelNumber], onDelete: Cascade, onUpdate: Cascade)
+  airplaneModelNumber  Int
+  departureAirport     Airport  @relation("DepartureAirport", fields: [departureAirportCode], references: [code], onUpdate: Cascade)
+  arrivalAirport       Airport  @relation("ArrivalAirport", fields: [arrivalAirportCode], references: [code], onUpdate: Cascade)
 }
