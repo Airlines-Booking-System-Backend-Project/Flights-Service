@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Flight" ALTER COLUMN "departureTime" SET DATA TYPE TIME,
+ALTER COLUMN "arrivalTime" SET DATA TYPE TIME;

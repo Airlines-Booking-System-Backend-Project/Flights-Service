@@ -40,12 +40,13 @@ model Flight {
   flightNumber         String   @unique
   departureAirportCode String
   arrivalAirportCode   String
-  departureTime        DateTime
   boardingGate         String
+  departureTime        DateTime
+  arrivalTime          DateTime
   totalSeats           Int
   price                Int
-  airplane             Airplane @relation(fields: [airplaneModelNumber], references: [modelNumber], onDelete: Cascade, onUpdate: Cascade)
   airplaneModelNumber  Int
-  departureAirport     Airport  @relation("DepartureAirport", fields: [departureAirportCode], references: [code], onUpdate: Cascade)
-  arrivalAirport       Airport  @relation("ArrivalAirport", fields: [arrivalAirportCode], references: [code], onUpdate: Cascade)
+  airplane             Airplane @relation(fields: [airplaneModelNumber], references: [modelNumber], onDelete: Cascade, onUpdate: Cascade)
+  departureAirport     Airport  @relation("DepartureAirport", fields: [departureAirportCode], references: [code], onUpdate: Cascade, onDelete: Cascade)
+  arrivalAirport       Airport  @relation("ArrivalAirport", fields: [arrivalAirportCode], references: [code], onUpdate: Cascade, onDelete: Cascade)
 }

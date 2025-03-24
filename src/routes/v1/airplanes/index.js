@@ -6,10 +6,10 @@ const router = express.Router()
 
 router
     .get('/', AirplaneController.getAll)
-    .get('/:modelNumber', AirplaneController.getAirplane)
+    .get('/:modelNumber', AirplaneMiddleware.isValidModelNumber, AirplaneController.getAirplane)
     .post('/', AirplaneMiddleware.validateInputs, AirplaneController.createAirplane)
-    .delete('/:modelNumber', AirplaneController.deleteAirplane)
-    .patch('/:modelNumber', AirplaneController.updateAirplane)
+    .delete('/:modelNumber', AirplaneMiddleware.isValidModelNumber, AirplaneController.deleteAirplane)
+    .patch('/:modelNumber', AirplaneMiddleware.isValidModelNumber, AirplaneController.updateAirplane)
 
 
 
