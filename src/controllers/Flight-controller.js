@@ -115,7 +115,7 @@ const filteredFlights = async (req, res) => {
         }
     }
     if (req.query.date) {
-        const departureDate = new Date(req.query.date); 
+        const departureDate = new Date(req.query.date);
         const startOfDay = new Date(departureDate.setUTCHours(0, 0, 0, 0));
         const endOfDay = new Date(startOfDay);
         endOfDay.setUTCHours(23, 59, 59, 999);
@@ -124,18 +124,18 @@ const filteredFlights = async (req, res) => {
             lte: endOfDay
         };
     }
-    if(req.query.seats){
+    if (req.query.seats) {
         filter.totalSeats = {
             gte: parseInt(req.query.seats),
         }
     }
-    if(req.query.sort){
+    if (req.query.sort) {
         const field = req.query.sort
         const [param, sort] = field.split('_')
         orderBy[param] = sort
     }
     try {
-        const response = await Flight_Service.getFilteredFlights(filter,orderBy)
+        const response = await Flight_Service.getFilteredFlights(filter, orderBy)
         return res.status(StatusCodes.OK).json(SuccessResponse('Successfully retrieved the filtered flights.', response))
     } catch (error) {
         console.log(error)

@@ -14,7 +14,7 @@ class AirplaneService {
 
     async get(modelNumber) {
         const airplane = await this.prisma.airplane.findFirst({
-            where: { modelNumber},
+            where: { modelNumber },
         })
         return airplane
     }

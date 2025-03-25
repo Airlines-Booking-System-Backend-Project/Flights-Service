@@ -44,10 +44,19 @@ class FlightService {
         return flight
     }
 
-    async getFilteredFlights(filter,orderBy) {
+    async getFilteredFlights(filter, orderBy) {
         const flights = await this.prisma.flight.findMany({
             where: filter,
-            orderBy: orderBy
+            orderBy: orderBy,
+            include: {
+                airplane: true,
+                arrivalAirport: {
+                    include: {
+                        city: true
+                    }
+                },
+                departureAirport: true
+            }
         })
         return flights
     }

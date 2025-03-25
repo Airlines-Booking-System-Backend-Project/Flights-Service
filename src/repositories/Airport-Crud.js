@@ -1,6 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
 
-class AirportService{
+class AirportService {
     constructor() {
         this.prisma = new PrismaClient()
     }
@@ -14,7 +14,7 @@ class AirportService{
 
     async get(code) {
         const airport = await this.prisma.airport.findFirst({
-            where: { code},
+            where: { code },
         })
         return airport
     }
