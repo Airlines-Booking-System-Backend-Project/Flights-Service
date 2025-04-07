@@ -215,7 +215,7 @@ async function main() {
     ],
   });
 
-  console.log('Seeding complete!');
+  console.log('Seeding complete!!');
 }
 
 main()
