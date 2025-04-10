@@ -2,7 +2,7 @@ const { StatusCodes } = require('http-status-codes');
 const validateInput = require('./input-middleware');
 const { ErrorResponse } = require('../utils');
 
-const constraints = [
+const constraints1 = [
     { params: 'flightNumber', dataType: 'string' },
     { params: 'boardingGate', dataType: 'string' },
     { params: 'departureAirportCode', dataType: 'string' },
@@ -12,6 +12,10 @@ const constraints = [
     { params: 'totalSeats', dataType: 'number' },
     { params: 'price', dataType: 'number' },
     { params: 'airplaneModelNumber', dataType: 'number' }
+]
+
+const constraints2 = [
+    { params: 'seats', dataType: 'number' }
 ]
 
 const isValidDate = (req, res, next) => {
@@ -41,7 +45,8 @@ const isValidId = (req, res, next) => {
 
 
 module.exports = {
-    validateInputs: validateInput(constraints),
+    validateInputs: validateInput(constraints1),
     isValidDate,
-    isValidId
+    isValidId,
+    validateInputForSeats: validateInput(constraints2)
 }

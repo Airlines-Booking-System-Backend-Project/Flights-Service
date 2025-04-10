@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client')
+const { addRowLock } = require('./queries')
 
 class FlightService {
     constructor() {
@@ -59,6 +60,35 @@ class FlightService {
             }
         })
         return flights
+    }
+
+    async updateSeats(id, seats, dec) {
+        const response = await this.prisma.$transaction(async (t) => {
+            t.$queryRaw(addRowLock(id))
+            if (dec) {
+                const response = await t.flight.update({
+                    where: { id },
+                    data: {
+                        totalSeats: {
+                            decrement: seats
+                        }
+                    }
+                })
+                return response
+            } else {
+                const response = await t.flight.update({
+                    where: { id },
+                    data: {
+                        totalSeats: {
+                            increment: seats
+                        }
+                    }
+                })
+                return response
+            }
+        }
+    )
+        return response
     }
 }
 

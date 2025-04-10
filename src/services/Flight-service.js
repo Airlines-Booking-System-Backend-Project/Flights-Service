@@ -37,6 +37,11 @@ async function getFilteredFlights(filter, orderBy) {
     return response
 }
 
+async function updateSeats(data) {
+    const response = await FlightService.updateSeats(data.id, data.seats, data.dec)
+    return response
+}
+
 module.exports = {
     createFlight,
     getAllFlights,
@@ -44,5 +49,6 @@ module.exports = {
     deleteAllFlights,
     deleteFlight,
     updateFlight,
-    getFilteredFlights
+    getFilteredFlights,
+    updateSeats
 }

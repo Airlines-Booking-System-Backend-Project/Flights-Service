@@ -138,12 +138,28 @@ const filteredFlights = async (req, res) => {
         const response = await Flight_Service.getFilteredFlights(filter, orderBy)
         return res.status(StatusCodes.OK).json(SuccessResponse('Successfully retrieved the filtered flights.', response))
     } catch (error) {
-        console.log(error)
         if (isPrismaError(error)) {
             let err = new prismaError(error)
             return res.status(err.statusCode).json(ErrorResponse(err.message, err))
         }
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse("Failed to retrive the filtered flights.", error))
+    }
+}
+
+const updateSeats = async (req,res) => {
+    try {
+        const response = await Flight_Service.updateSeats({
+            id: parseInt(req.params.id),
+            seats: req.body.seats,
+            dec: req.body.dec
+        })
+        return res.status(StatusCodes.OK).json(SuccessResponse("Successfully updated the seats.", response))
+    } catch (error) {
+        if (isPrismaError(error)) {
+            let err = new prismaError(error)
+            return res.status(err.statusCode).json(ErrorResponse(err.message, err))
+        }
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse("Failed to update the seats.", error))
     }
 }
 
@@ -153,5 +169,6 @@ module.exports = {
     updateFlight,
     getAllFlight,
     getFlight,
-    filteredFlights
+    filteredFlights,
+    updateSeats
 }
