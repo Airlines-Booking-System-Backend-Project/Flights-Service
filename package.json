@@ -13,11 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^6.5.0",
+    "@prisma/client": "^6.6.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-status-codes": "^2.3.0",
-    "prisma": "^6.5.0",
     "prisma-better-errors": "^1.0.4"
+  },
+  "devDependencies": {
+    "prisma": "^6.6.0"
   }
 }
